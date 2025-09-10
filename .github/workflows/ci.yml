@@ -22,7 +22,6 @@ jobs:
           pip install pytest
 
       - name: Lancer les tests
-        working-directory: src
         run: |
           python3 -m pytest
 
