@@ -12,7 +12,7 @@ def test_app():
     assert my_calculator.get_hello_message() == "== Calculatrice v1.0 =="
 
 def test_addition():
-    assert my_calculator.addition(2, 3) == 5
+    assert my_calculator.addition(5, 3) == 8
 
 def test_subtraction():
     assert my_calculator.subtraction(5, 3) == 2
