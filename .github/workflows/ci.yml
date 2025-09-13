@@ -3,13 +3,13 @@ name: example_CI
 on: [push, pull_request]
 
 jobs:
-  build:
+  test:
     runs-on: self-hosted
     environment: Test Pipeline CI/CD
 
     steps:
-      - name: Checkout dépot
-        uses: actions/checkout@v3
+      - name: Checkout dépôt
+        uses: actions/checkout@v4
 
       - name: Installer Python
         uses: actions/setup-python@v4
@@ -22,9 +22,9 @@ jobs:
           pip install -r requirements.txt
           pip install pytest
 
-      -name: Créer fichier.env
+      - name: Créer fichier .env
         run: |
-                    echo "DB_HOST=127.0.0.1" >> .env
+          echo "DB_HOST=127.0.0.1" >> .env
           echo "DB_PORT=3306" >> .env 
           echo "DB_NAME=labo02_db" >> .env
           echo "DB_USER=labo02" >> .env 
@@ -40,9 +40,10 @@ jobs:
     
   deploy:
     runs-on: self-hosted
-    needs: test   # Ne se lance que si les tests passent
+    needs: test   
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout dépôt
+        uses: actions/checkout@v4
 
       - name: Déploiement local
         run: |
@@ -51,5 +52,3 @@ jobs:
 
           docker compose down || true
           docker compose up -d --build
-
-
